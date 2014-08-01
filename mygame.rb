@@ -1,12 +1,9 @@
 require 'sinatra'
 
-set :public_folder, 'public'
-
 get '/hello_world' do
-  ##redirect 'images/twitter.gif'
-  erb :image
+  File.read(File.join('views', 'image.html'))
 end
 
 get '/' do
-  erb :board
+  File.read(File.join('views', 'board.html'))
 end

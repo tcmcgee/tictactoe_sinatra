@@ -1,14 +1,26 @@
-class mygame_spec.rb
+require 'sinatra'
+require 'sinatra/contrib'
+require 'rack/test'
+require './mygame'
 
-  include Rack::Test::Methods
+include Rack::Test::Methods
 
-  def app
-    Sinatra::Application
+def app
+  Sinatra::Application
+end
+
+describe 'my game' do
+  describe '/' do
+    it "returns a 200" do
+      get '/'
+      last_response.status.should == 200
+    end
   end
 
-  def test_for_echo
-    get '/'
-    assert last_response.ok?
-    assert_equal "Echo", last_response.body
+  describe '/hello_world' do
+    it "returns a 200" do
+      get '/hello_world'
+      last_response.status.should == 200
+    end
   end
 end
