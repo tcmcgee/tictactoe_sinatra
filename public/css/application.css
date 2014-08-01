@@ -7,6 +7,13 @@
     border-bottom:1px solid #000;
 }
 
+.bu{
+    width:99px;
+    height:99px;
+    border-style: hidden;
+    background: transparent;
+    border: none !important;
+    }
 .l{
     border-left:0px solid #000;
 }
