@@ -15,5 +15,7 @@ end
 post '/game' do
   board_size = params[:board_size]
   board = TicTacToe::Board.new(params[:board_size].to_i)
+  temp_tiles = ['X',nil,nil,'O',nil,nil,'X',nil,nil]
+  board.set_tiles(temp_tiles)
   erb :board, :locals => {:board => board}
 end
