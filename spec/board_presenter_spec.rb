@@ -1,1 +1,0 @@
-board_presenter_spec.rb

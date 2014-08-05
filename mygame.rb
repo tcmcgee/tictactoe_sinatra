@@ -4,18 +4,24 @@ require './lib/presenters/option_presenter'
 require 'bundler/setup'
 require 'tic_tac_toe'
 
+
+
 get '/hello_world' do
-  File.read(File.join('views', 'image.html'))
+	File.read(File.join('views', 'image.html'))
 end
 
 get '/' do
-  erb :index
+	erb :index
+end
+
+post '/move' do
+params.to_s
 end
 
 post '/game' do
-  board_size = params[:board_size]
-  board = TicTacToe::Board.new(params[:board_size].to_i)
-  temp_tiles = ['X',nil,nil,'O',nil,nil,'X',nil,nil]
-  board.set_tiles(temp_tiles)
-  erb :board, :locals => {:board => board}
+	board_size = params[:board_size].to_i
+	board = TicTacToe::Board.new(board_size*board_size)
+	temp_tiles = ['X', nil,nil,'O',nil,nil,'X',nil,nil]
+	board.set_tiles(temp_tiles)
+	erb :board, :locals => {:board => board}
 end
