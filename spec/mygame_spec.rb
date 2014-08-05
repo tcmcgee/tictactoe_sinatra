@@ -23,4 +23,11 @@ describe 'my game' do
       last_response.status.should == 200
     end
   end
+
+  describe '/game' do
+    it "returns a 200" do
+      post '/game'
+      last_response.status.should == 200
+    end
+  end
 end

@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/tcmcgee/TicTacToeRuby
+  revision: 4bb9445c4d105a5f62369948cf94af2358b265fa
+  branch: newgrid
+  specs:
+    tic_tac_toe (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -31,10 +38,11 @@ GEM
     tilt (1.4.1)
 
 PLATFORMS
-  ruby
+  x86-mingw32
 
 DEPENDENCIES
   rack-test (~> 0.6.2)
   rspec (~> 2.5.0)
   sinatra (~> 1.4.5)
   sinatra-contrib (~> 1.4.2)
+  tic_tac_toe!

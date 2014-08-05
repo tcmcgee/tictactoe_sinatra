@@ -15,19 +15,4 @@
     border: none !important;
     font-size:xx-large;
     font-weight:bolder;
-    }
-.l{
-    border-left:0px solid #000;
-}
-
-.r{
-    border-right:0px solid #000;
-}
-
-.t{
-    border-top:0px solid #000;
-}
-
-.b{
-    border-bottom:0px solid #000;
 }
