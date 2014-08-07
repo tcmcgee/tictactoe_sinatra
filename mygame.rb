@@ -15,10 +15,17 @@ get '/' do
 end
 
 post '/move' do
-params.to_s
+	output = ""
+	(0...9).each do |tile|
+		if params["move_choice" + tile.to_s + ".0"] == ""
+				output = tile.to_s
+		end 
+	end
+	output
 end
 
 post '/game' do
+	
 	board_size = params[:board_size].to_i
 	board = TicTacToe::Board.new(board_size*board_size)
 	temp_tiles = ['X', nil,nil,'O',nil,nil,'X',nil,nil]
