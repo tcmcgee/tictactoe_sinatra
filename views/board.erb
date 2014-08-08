@@ -1,7 +1,9 @@
 <html>
 <link rel="stylesheet" href="/css/application.css">
-<head>WELCOME</head>
+<head></head>
 <body>
+  <%= MessagePresenter.get_status_message(board) %>
   <%= BoardPresenter.make_board(board) %>
+  <%= PlayAgainPresenter.button(board) %>
   </body>
 </html>

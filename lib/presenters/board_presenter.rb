@@ -1,7 +1,7 @@
 class BoardPresenter
 	def self.make_board(board)
 		board_size = Math.sqrt(board.tiles.length)
-		html_string = "<h1>" + board.tiles.to_s + " </h1>"
+		html_string = ""
 	
 		html_string += '<div id="tttBoard">'
 		html_string += '<table>'
@@ -13,7 +13,7 @@ class BoardPresenter
      		(0...board_size).each do |column|
 
         		html_string += '<td class="square r' + ((row != board_size - 1) ? row.to_s : 'l') + ' c' + ((column != board_size - 1) ? column.to_s : 'l') + '">
-        		<input class = "bu" type=' + ((tiles[(row * board_size + column)].to_s == "") ? "submit " : "button " ) +  'name = "move_choice' + (row * board_size + column).to_s + '_' + self.tiles_to_s(tiles) +  '" value="' + tiles[(row * board_size + column)].to_s + '"></td>'
+        		<input class = "bu" type=' + ((tiles[(row * board_size + column)].to_s == "" && board.over == false) ? "submit " : "button " ) +  'name = "move_choice' + (row * board_size + column).to_s + '_' + self.tiles_to_s(tiles) +  '" value="' + tiles[(row * board_size + column)].to_s + '"></td>'
       			counter += 1
       		end
       		html_string += '</tr>'
