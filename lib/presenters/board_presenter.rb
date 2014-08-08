@@ -13,7 +13,7 @@ class BoardPresenter
      		(0...board_size).each do |column|
 
         		html_string += '<td class="square r' + ((row != board_size - 1) ? row.to_s : 'l') + ' c' + ((column != board_size - 1) ? column.to_s : 'l') + '">
-        		<input class = "bu" type=' + ((tiles[(row * board_size + column)].to_s == "") ? "submit " : "button " ) +  'name = "move_choice' + (row * board_size + column).to_s +  '" value="' + tiles[(row * board_size + column)].to_s + '"></td>'
+        		<input class = "bu" type=' + ((tiles[(row * board_size + column)].to_s == "") ? "submit " : "button " ) +  'name = "move_choice' + (row * board_size + column).to_s + '_' + self.tiles_to_s(tiles) +  '" value="' + tiles[(row * board_size + column)].to_s + '"></td>'
       			counter += 1
       		end
       		html_string += '</tr>'
@@ -24,4 +24,17 @@ class BoardPresenter
   		html_string += '</div>'
   		
 	end
+
+
+  def self.tiles_to_s(tiles)
+    output = ""
+    (0...tiles.length).each do |tile|
+      if tiles[tile].to_s == ""
+        output = output + "-"
+      else
+        output = output + tiles[tile]
+      end
+    end
+    output
+  end
 end
