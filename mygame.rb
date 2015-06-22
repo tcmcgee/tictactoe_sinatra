@@ -24,7 +24,7 @@ post '/move' do
 	new_board = TicTacToe::Board.new(new_tiles.length)
 	new_board.set_tiles(new_tiles)
 
-	computer = TicTacToe::Computer.new
+	computer = TicTacToe::Recursive_computer.new
 	if new_tiles.compact.length != new_tiles.length && !new_board.over
 		new_board.turn=(false)
 		new_tiles[computer.turn(new_tiles) - 1] = 'O'
