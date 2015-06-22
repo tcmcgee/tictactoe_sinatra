@@ -23,8 +23,12 @@ post '/move' do
 	(params.key("").length > 31 ? new_tiles[params.key("")[11,2].to_i] = 'X' : new_tiles[params.key("")[11].to_i] = 'X')
 	new_board = TicTacToe::Board.new(new_tiles.length)
 	new_board.set_tiles(new_tiles)
+	if new_tiles.length < 10
+		computer = TicTacToe::Recursive_computer.new
+	else
+		computer = TicTacToe::Computer.new
+	end
 
-	computer = TicTacToe::Recursive_computer.new
 	if new_tiles.compact.length != new_tiles.length && !new_board.over
 		new_board.turn=(false)
 		new_tiles[computer.turn(new_tiles) - 1] = 'O'
