@@ -15,4 +15,9 @@ def print_player_turn
 		"<h1> It's your move! </h1>"
 end
 
+def please_wait
+	"<h1> The Computer is deciding, please wait! </h1>"
+end
+
+
 end

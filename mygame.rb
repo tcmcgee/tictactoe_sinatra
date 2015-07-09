@@ -5,9 +5,16 @@ require './lib/presenters/message_presenter'
 require './lib/presenters/play_again_presenter'
 require 'bundler/setup'
 require 'tic_tac_toe'
+require 'json'
 
 
 public
+before do
+  headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
+  headers['Access-Control-Allow-Origin'] = '*'
+  headers['Access-Control-Allow-Headers'] = 'accept, authorization, origin'
+  headers['Access-Control-Allow-Credentials'] = 'true'
+end
 get '/hello_world' do
 	File.read(File.join('views', 'image.html'))
 end
@@ -49,6 +56,28 @@ post '/game' do
 	board.set_tiles(temp_tiles)
 	erb :board, :locals => {:board => board}
 end
+
+get '/get_ai_move' do
+	server_computer = TicTacToe::Recursive_computer.new()
+	json_board = request.query_string
+	board = json_board_to_array(json_board)
+	move = server_computer.turn(board)
+	{ :move => move}.to_json
+end
+
+def json_board_to_array(json_board)
+
+	json_board = json_board.gsub('%22','')
+	json_board = json_board.gsub('[','')
+	json_board = json_board.gsub(',','_')
+	json_board = json_board.gsub(']','')
+	board = json_board.split('_')
+	board.collect! { |element|
+		(element == "nil") ? nil : element
+	}
+	return board
+end
+
 
 
 def string_board_to_array(str_board)
