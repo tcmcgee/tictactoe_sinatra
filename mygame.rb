@@ -24,7 +24,6 @@ get '/' do
 end
 
 post '/move' do
-
 	str_board = params.key("")[((params.key("").length > 31) ? 16 : 15)..-1].to_str
 	new_tiles = string_board_to_array(str_board)
 	(params.key("").length > 31 ? new_tiles[params.key("")[11,2].to_i] = 'X' : new_tiles[params.key("")[11].to_i] = 'X')
@@ -65,8 +64,25 @@ get '/get_ai_move' do
 	{ :move => move}.to_json
 end
 
-def json_board_to_array(json_board)
+get '/get_winner' do
+	json_board = request.query_string
+	board = json_board_to_array(json_board)
+	game_board = TicTacToe::Board.new(board.length)
+	game_board.set_tiles(board)
+	if (game_board.over)
+		
+			if (game_board.tie?)
+				
+					return {:winner => ""}.to_json
+			else
+					return {:winner => game_board.get_winner}.to_json
+			end
+		end
+	{:winner => "continue"}.to_json
+end
 
+
+def json_board_to_array(json_board)
 	json_board = json_board.gsub('%22','')
 	json_board = json_board.gsub('[','')
 	json_board = json_board.gsub(',','_')
