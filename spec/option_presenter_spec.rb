@@ -1,4 +1,4 @@
-require './lib/presenters/option_presenter'
+require_relative '../lib/presenters/option_presenter'
 
 include Rack::Test::Methods
 

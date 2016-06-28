@@ -1,8 +1,8 @@
 require 'sinatra'
-require './lib/presenters/board_presenter'
-require './lib/presenters/option_presenter'
-require './lib/presenters/message_presenter'
-require './lib/presenters/play_again_presenter'
+require_relative './lib/presenters/board_presenter'
+require_relative './lib/presenters/option_presenter'
+require_relative './lib/presenters/message_presenter'
+require_relative './lib/presenters/play_again_presenter'
 require 'bundler/setup'
 require 'tic_tac_toe'
 require 'json'
@@ -10,11 +10,12 @@ require 'json'
 
 public
 before do
-  headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
-  headers['Access-Control-Allow-Origin'] = '*'
-  headers['Access-Control-Allow-Headers'] = 'accept, authorization, origin'
-  headers['Access-Control-Allow-Credentials'] = 'true'
+	headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
+	headers['Access-Control-Allow-Origin'] = '*'
+	headers['Access-Control-Allow-Headers'] = 'accept, authorization, origin'
+	headers['Access-Control-Allow-Credentials'] = 'true'
 end
+
 get '/hello_world' do
 	File.read(File.join('views', 'image.html'))
 end
@@ -40,7 +41,6 @@ post '/move' do
 		new_tiles[computer.turn(new_tiles) - 1] = 'O'
 	else
 		new_board.turn=(true)
-		#redirect '/'
 	end
 	new_board.set_tiles(new_tiles)
 	erb :board, :locals => {:board => new_board}
@@ -48,7 +48,6 @@ post '/move' do
 end
 
 post '/game' do
-	#TicTacToe::Game.new(SinatraUI.new)
 	board_size = params[:board_size].to_i
 	board = TicTacToe::Board.new(board_size*board_size)
 	temp_tiles = Array.new(board_size*board_size,nil)
@@ -70,17 +69,14 @@ get '/get_winner' do
 	game_board = TicTacToe::Board.new(board.length)
 	game_board.set_tiles(board)
 	if (game_board.over)
-		
-			if (game_board.tie?)
-				
-					return {:winner => ""}.to_json
-			else
-					return {:winner => game_board.get_winner}.to_json
-			end
+		if (game_board.tie?)
+			return {:winner => ""}.to_json
+		else
+			return {:winner => game_board.get_winner}.to_json
 		end
+	end
 	{:winner => "continue"}.to_json
 end
-
 
 def json_board_to_array(json_board)
 	json_board = json_board.gsub('%22','')
@@ -94,8 +90,6 @@ def json_board_to_array(json_board)
 	return board
 end
 
-
-
 def string_board_to_array(str_board)
 	board = Array.new(str_board.length)
 	(0...str_board.length).each do |tile|
@@ -108,6 +102,4 @@ def string_board_to_array(str_board)
 		end
 	end
 	board
-
-
 end

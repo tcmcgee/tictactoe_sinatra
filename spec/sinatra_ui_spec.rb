@@ -31,6 +31,7 @@ describe 'sinatra_ui' do
       ui.print_winner(board).should == "<h1> It's a Tie!! </h1>"
     end
   end
+
  describe 'print_player_turn' do
   	ui = Sinatra_UI.new
     it "returns a message to notify the player it is their turn" do
@@ -38,6 +39,26 @@ describe 'sinatra_ui' do
       board.set_tiles(Array.new(9,nil))
 
       ui.print_player_turn.should == "<h1> It's your move! </h1>"
+    end
+  end
+
+   describe 'print_player_turn' do
+    ui = Sinatra_UI.new
+    it "returns a message to notify the player it is their turn" do
+      board = TicTacToe::Board.new(9)
+      board.set_tiles(Array.new(9,nil))
+
+      ui.print_player_turn.should == "<h1> It's your move! </h1>"
+    end
+  end
+
+  describe 'print_games_completed' do
+    ui = Sintara_UI.new
+    it "returns a message that tells the player how many games are completed" do
+      file = File.open("./public/games_completed.txt", "r")
+      expected_counter = file.read.to_s
+
+      ui.print_games_completed.should == "<h1> Games Completed: " + expected_counter + " </h1>"
     end
   end
 end

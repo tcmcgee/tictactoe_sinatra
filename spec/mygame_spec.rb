@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'sinatra/contrib'
 require 'rack/test'
-require './mygame'
+require_relative '../mygame.rb'
 
 include Rack::Test::Methods
 
@@ -9,7 +9,7 @@ def app
   Sinatra::Application
 end
 
-describe 'my game' do
+describe 'mygame' do
   describe '/' do
     it "returns a 200" do
       get '/'
